@@ -7,16 +7,24 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      show: true,
+      show: false,
     };
+
+    this.showDemoHandler = this.showDemoHandler.bind(this);
+  }
+
+  showDemoHandler(trigger) {
+    this.setState({
+      show: trigger,
+    });
   }
 
   render() {
     return (
       <div className="main">
-        {this.state.show ? (
+        {!this.state.show ? (
           <div className="App">
-            <Interactive />
+            <Interactive showDemo={this.showDemoHandler} />
           </div>
         ) : (
           <div className="demo">

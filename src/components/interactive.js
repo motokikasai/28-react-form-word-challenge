@@ -37,6 +37,8 @@ export default class Interactive extends Component {
       this.setState({
         lessThanThree: true,
       });
+    } else {
+      return this.props.showDemo(true);
     }
   }
 
