@@ -4,11 +4,11 @@
   align-items: center;
   height: 100vh;
   min-width: 400px;
-  background: orangered;
+  background: rgb(255, 118, 69);
 }
 
 .container {
-  background: mistyrose;
+  background: white;
   padding: 40px;
   width: 400px;
 }
