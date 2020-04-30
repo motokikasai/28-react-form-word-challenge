@@ -6,11 +6,13 @@ export default class Interactive extends Component {
 
     this.state = {
       words: [],
+      lessThanThree: false,
     };
 
     this.submitHandler = this.submitHandler.bind(this);
     this.wordsInputHandler = this.wordsInputHandler.bind(this);
     this.addHandler = this.addHandler.bind(this);
+    this.showMessageHandler = this.showMessageHandler.bind(this);
   }
 
   submitHandler(e) {
@@ -18,14 +20,24 @@ export default class Interactive extends Component {
   }
 
   wordsInputHandler(e) {
-    console.log(e.target.value);
+    // console.log(e.target.value);
+    this.valueInput = e.target.value;
   }
 
-  addHandler(e) {
+  addHandler() {
     const wordsArr = [...this.state.words];
     this.setState({
-      words: [...wordsArr, e.target.value],
+      words: [...wordsArr, this.valueInput],
     });
+    console.log(this.state.words);
+  }
+
+  showMessageHandler() {
+    if (this.state.words.length < 3) {
+      this.setState({
+        lessThanThree: true,
+      });
+    }
   }
 
   render() {
@@ -34,8 +46,11 @@ export default class Interactive extends Component {
         <form onSubmit={this.submitHandler}>
           <div>Add words</div>
           <input type="text" onChange={this.wordsInputHandler} />
+          {this.state.lessThanThree && <p>At least 3 words to continue</p>}
           <div className="buttons">
-            <button>Show me the message</button>
+            <button onClick={this.showMessageHandler}>
+              Show me the message
+            </button>
             <button onClick={this.addHandler}>Add new word</button>
           </div>
         </form>
