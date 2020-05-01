@@ -52,3 +52,17 @@ button {
   padding: 10px;
   margin-left: 4px;
 }
+
+.cancel-icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 40px;
+  margin: 20px;
+  padding: 20px;
+  transition: 0.3s;
+}
+
+.cancel-icon:hover {
+  transform: rotate(90deg);
+}

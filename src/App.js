@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import Interactive from "./components/interactive";
+import cancelIcon from "./cancel.png";
 
 class App extends React.Component {
   constructor(props) {
@@ -12,7 +13,6 @@ class App extends React.Component {
     };
 
     this.showDemoHandler = this.showDemoHandler.bind(this);
-    // this.initAnimationHandler = this.initAnimationHandler.bind(this);
   }
 
   showDemoHandler(arrWords) {
@@ -41,9 +41,6 @@ class App extends React.Component {
     }, 1000);
   }
 
-  // initAnimationHandler() {
-  // }
-
   render() {
     return (
       <div className="main">
@@ -53,8 +50,12 @@ class App extends React.Component {
           </div>
         ) : (
           <div className="demo">
+            <img src={cancelIcon} className="cancel-icon" alt="cancel" />
             <div className="message">
-              I am a <span className="cycler">{this.state.display}</span>
+              I am a{" "}
+              <span className="cycler">
+                {!this.state.display ? this.state.data[0] : this.state.display}
+              </span>
             </div>
           </div>
         )}

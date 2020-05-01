@@ -68,11 +68,7 @@ export default class Interactive extends Component {
       <div className="container">
         <form onSubmit={this.submitHandler}>
           <div>Add words</div>
-          <input
-            type="text"
-            onChange={this.wordsInputHandler}
-            // value={this.state.reset}
-          />
+          <input type="text" onChange={this.wordsInputHandler} />
           {this.state.error && <p>At least 3 words to continue</p>}
           <div className="buttons">
             <button onClick={this.showMessageHandler}>
