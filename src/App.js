@@ -13,6 +13,7 @@ class App extends React.Component {
     };
 
     this.showDemoHandler = this.showDemoHandler.bind(this);
+    this.cancelHandler = this.cancelHandler.bind(this);
   }
 
   showDemoHandler(arrWords) {
@@ -22,7 +23,7 @@ class App extends React.Component {
 
     let dataIndex = 0;
 
-    setInterval(() => {
+    const timeout = setInterval(() => {
       console.log(dataIndex);
       // DO NOT USE CONSOLE.LOG WITH "++" FOR IT ADDS UP!!!
       if (dataIndex === this.state.data.length) {
@@ -39,6 +40,17 @@ class App extends React.Component {
         dataIndex++;
       }
     }, 1000);
+
+    this.timeout = timeout;
+  }
+
+  cancelHandler() {
+    this.setState({
+      data: false,
+      display: "",
+    });
+
+    clearInterval(this.timeout);
   }
 
   render() {
@@ -50,7 +62,12 @@ class App extends React.Component {
           </div>
         ) : (
           <div className="demo">
-            <img src={cancelIcon} className="cancel-icon" alt="cancel" />
+            <img
+              src={cancelIcon}
+              className="cancel-icon"
+              alt="cancel"
+              onClick={this.cancelHandler}
+            />
             <div className="message">
               I am a{" "}
               <span className="cycler">
