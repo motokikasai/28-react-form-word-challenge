@@ -6,36 +6,58 @@ export default class Interactive extends Component {
 
     this.state = {
       words: [],
+      inputValue: "",
       lessThanThree: false,
+      error: false,
     };
 
-    this.submitHandler = this.submitHandler.bind(this);
     this.wordsInputHandler = this.wordsInputHandler.bind(this);
     this.addHandler = this.addHandler.bind(this);
     this.showMessageHandler = this.showMessageHandler.bind(this);
+    this.clearInput = this.clearInput.bind(this);
   }
 
   submitHandler(e) {
     e.preventDefault();
+    e.target.reset(); // beautiful little trick!
+  }
+
+  clearInput() {
+    this.setState({
+      inputValue: "",
+    });
   }
 
   wordsInputHandler(e) {
-    // console.log(e.target.value);
-    this.valueInput = e.target.value;
+    this.setState({
+      inputValue: e.target.value,
+    });
   }
 
   addHandler() {
+    this.clearInput();
+    console.log(this.valueInput);
+
     const wordsArr = [...this.state.words];
-    this.setState({
-      words: [...wordsArr, this.valueInput],
-    });
-    console.log(this.state.words);
+
+    if (!this.state.inputValue) {
+      this.setState({
+        error: false,
+      });
+    } else {
+      this.setState({
+        words: [...wordsArr, this.state.inputValue],
+        error: false,
+      });
+    }
   }
 
   showMessageHandler() {
+    this.clearInput();
+
     if (this.state.words.length < 3) {
       this.setState({
-        lessThanThree: true,
+        error: true,
       });
     } else {
       return this.props.showDemo(true);
@@ -47,8 +69,12 @@ export default class Interactive extends Component {
       <div className="container">
         <form onSubmit={this.submitHandler}>
           <div>Add words</div>
-          <input type="text" onChange={this.wordsInputHandler} />
-          {this.state.lessThanThree && <p>At least 3 words to continue</p>}
+          <input
+            type="text"
+            onChange={this.wordsInputHandler}
+            // value={this.state.reset}
+          />
+          {this.state.error && <p>At least 3 words to continue</p>}
           <div className="buttons">
             <button onClick={this.showMessageHandler}>
               Show me the message
