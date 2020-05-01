@@ -36,7 +36,6 @@ export default class Interactive extends Component {
 
   addHandler() {
     this.clearInput();
-    console.log(this.valueInput);
 
     const wordsArr = [...this.state.words];
 
@@ -60,7 +59,7 @@ export default class Interactive extends Component {
         error: true,
       });
     } else {
-      return this.props.showDemo(true);
+      this.props.showDemo(this.state.words);
     }
   }
 

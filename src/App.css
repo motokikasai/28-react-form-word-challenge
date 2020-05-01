@@ -46,3 +46,9 @@ button {
   font-size: 1.4rem;
   background: rgb(27, 27, 27);
 }
+
+.cycler {
+  background: hotpink;
+  padding: 10px;
+  margin-left: 4px;
+}
